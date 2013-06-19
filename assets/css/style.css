@@ -55,6 +55,13 @@
 	
 }
 
+#error-left
+{
+    padding: 2px;
+    background-color: red;
+    color: white;
+}
+
 /* Right Part */
 #righ-part
 {
@@ -99,3 +106,16 @@ h1, h2, h3, h4
 	margin: 0;
 }
 
+.error
+{
+    padding: 10px;
+    background-color: red;
+    color: white;
+}
+
+.success
+{
+    padding: 10px;
+    background-color: green;
+    color: white;
+}

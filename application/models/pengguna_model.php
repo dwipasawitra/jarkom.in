@@ -14,7 +14,7 @@ class pengguna_model extends CI_Model
         parent::__construct();
     }
     
-    function tambahkan_pengguna(string $nama_login, string $nama_lengkap, string $surel, string $password_md5)
+    function tambahkan_pengguna($nama_login,$nama_lengkap,$surel, $password_md5)
     {
         // Asumsi: Password telah dikonversi ke MD5 oleh pengendali
         $data = array(
@@ -29,13 +29,13 @@ class pengguna_model extends CI_Model
                 
     }
     
-    function baca_data_pengguna(string $nama_login)
+    function baca_data_pengguna($nama_login)
     {
         $query = $this->db->get_where("pengguna", array("nama_login" => $nama_login));
         return $query->first_row("array");
     }
     
-    function ubah_data_pengguna(string $nama_login, string $nama_lengkap = null, string $surel = null, string $password_md5 = null)
+    function ubah_data_pengguna($nama_login, $nama_lengkap = null, $surel = null, $password_md5 = null)
     {
         if(!is_null($nama_lengkap)) 
         {
@@ -52,12 +52,12 @@ class pengguna_model extends CI_Model
         if(!is_null($password_md5)) 
         {
             $this->db->where("nama_login", $nama_login);
-            $this->db->update("pengguna", array("password_md5" => $password_md5));
+            $this->db->update("pengguna", array("password" => $password_md5));
         }
         
     }
     
-    function verifikasi_pengguna(string $nama_login, string $password_md5)
+    function verifikasi_pengguna($nama_login, $password_md5)
     {
         $query = $this->db->get_where("pengguna", array("nama_login" => $nama_login, "password" => $password_md5));
         if($query->num_rows() == 1)
@@ -70,7 +70,7 @@ class pengguna_model extends CI_Model
         }
     }
     
-    function top_up_kredit_pengguna(string $nama_login, int $tambahan_topup)
+    function top_up_kredit_pengguna($nama_login, $tambahan_topup)
     {
         // Ambil nilai kredit pengguna sebelumnya
         $query = $this->db->get_where("pengguna", array("nama_login" => $nama_login));

@@ -11,16 +11,17 @@ class sesi_model extends CI_Model
     function __construct()
     {
         parent::__construct();
+        $this->load->model("pengguna_model");
     }
     
-    function lakukan_login(string $nama_login, string $password)
+    function lakukan_login($nama_login, $password)
     {
         $password_md5 = md5($password);
         
         // Lakukan proses login
         if($this->pengguna_model->verifikasi_pengguna($nama_login, $password_md5))
         {
-            // Buat sesi baru
+            // Buat sesi barudi 
             $this->session->sess_create();
             $this->session->set_userdata("nama_login", $nama_login);
             
