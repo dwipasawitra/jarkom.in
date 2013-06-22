@@ -30,7 +30,6 @@
 class CI_Controller {
 
 	private static $instance;
-
 	/**
 	 * Constructor
 	 */

@@ -1,0 +1,121 @@
+#logo
+{
+	width: 90%;
+	margin: auto;
+}
+
+#container
+{
+}
+
+/* Left Part */
+#left-part
+{
+	background-color: #ffccaa;
+	overflow: hidden;
+}
+
+#left-part-content 
+{
+	padding: 10px;
+	font-size: 0.8em;
+}
+
+#login-form input
+{
+	width: 100%;
+	font-size: 1em;
+	border: 0;
+	padding: 3px;
+}
+
+#tagline
+{
+	text-align: center;
+	line-height: 1;
+	font-style: italic;
+	font-size: 0.9em;
+}
+
+.sidebar-item
+{
+	line-height: 1;
+}
+.sidebar-item img
+{
+	float: left;
+	width: 20%;
+	margin-right: 10px;
+}
+
+.sidebar-item p
+{
+	float: left;
+	width: 70%;
+	
+}
+
+#error-left
+{
+    padding: 2px;
+    background-color: red;
+    color: white;
+}
+
+/* Right Part */
+#righ-part
+{
+	background-color: #ffffff;
+}
+
+
+#title
+{
+	background-color: #ffe6d5;
+}
+
+#title-content
+{
+	padding: 10px;
+}
+
+#content-content
+{
+	padding: 10px;
+}
+
+#content-content p
+{
+	text-align: justify;
+	font-size: 0.9em;
+}
+
+/* Footer */
+#footer
+{
+	font-size: 0.7em;
+	padding: 10px;
+	border: 1px solid black;
+	line-height: 1;
+	
+}
+
+/* Umum */
+h1, h2, h3, h4
+{
+	margin: 0;
+}
+
+.error
+{
+    padding: 10px;
+    background-color: red;
+    color: white;
+}
+
+.success
+{
+    padding: 10px;
+    background-color: green;
+    color: white;
+}
