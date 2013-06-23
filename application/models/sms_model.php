@@ -21,8 +21,11 @@ class sms_model extends CI_Model
         $result = array();
         
         // Hanya mendaftarkan SMS yang siap kirim (terkirim => 0)
+        // Dan waktunya melebihi waktu saat ini
+        $waktu_saat_ini = new DateTime();
         
-        $query = $this->db->get_where("sms_pesanan", array("terkirim" => 0));
+        $query = $this->db->get_where("sms_pesanan", array("terkirim" => 0, "waktu_kirim <=" => $waktu_saat_ini->format("Y-m-d H:i:s")));
+        //echo $this->db->last_query();
         foreach($query->result_array() as $row)
         {
             $result[] = $row;

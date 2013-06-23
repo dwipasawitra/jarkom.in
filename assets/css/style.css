@@ -119,3 +119,40 @@ h1, h2, h3, h4
     background-color: green;
     color: white;
 }
+
+td
+{
+    vertical-align: middle;
+}
+
+/* Modal Dialog */
+
+.modal-dialog
+{
+
+    color: black;
+    background-color: #ffccaa;
+    padding: 10px;
+}
+
+.simplemodal-overlay
+{
+    background: #000;
+}
+
+.link-action
+{
+    color: blue;
+    cursor: pointer;
+}
+
+.link-action:hover
+{
+    color: red;
+}
+
+input[type='text']
+{
+    border: 1px solid black;
+    padding: 2%;
+}

@@ -21,6 +21,12 @@ class kontak_model extends CI_Model
         );
         
         $this->db->insert("kontak", $data_baru);
+        
+        // Ambil id kontak
+        $query = $this->db->get_where("kontak", $data_baru);
+        $data_kontak = $query->first_row("array");
+        
+        return $data_kontak["id_kontak"];
     }
     
     function sunting_kontak($id_kontak, $nama_kontak = null, $no_handphone = null)
@@ -34,14 +40,25 @@ class kontak_model extends CI_Model
         
         if($no_handphone != null)
         {
-            $this->db->update("kontak", array("no_handphone" => no_handphone));
+            $this->db->update("kontak", array("no_handphone" => $no_handphone));
         }
     }
     
     function hapus_kontak($id_kontak)
     {
+        // Cascade ke tabel grup_kontak;
+        $this->db->where("kontak", $id_kontak);
+        $this->db->delete("grup_kontak");
+        
+        // Cascade ke tabel sms_dipesan
+        $this->db->where("kontak", $id_kontak);
+        $this->db->delete("sms_pesanan");
+        
         $this->db->where("id_kontak", $id_kontak);
         $this->db->delete("kontak");
+        
+        
+        
     }
     
     function lihat_kontak($nama_login, $kriteria)
@@ -60,6 +77,33 @@ class kontak_model extends CI_Model
         return $hasil;
     }
     
+    function lihat_semua_kontak($nama_login)
+    {
+        $hasil = array();
+        $query = $this->db->get_where("kontak", array("pengguna" => $nama_login));
+        if($query->num_rows() > 0)
+        {
+            foreach($query->result_array() as $row)
+            {
+                $hasil[] = $row;
+            }
+        }
+        return $hasil;
+    }
+    
+    function ambil_data_kontak($id_kontak)
+    {
+        $query = $this->db->get_where("kontak", array("id_kontak" => $id_kontak));
+        if($query->num_rows() > 0)
+        {
+            return $query->first_row("array");
+        }
+        else
+        {
+            return null;
+        }
+    }
+    
     // Grup
     function tambah_grup($nama_login, $nama_grup)
     {
@@ -69,6 +113,12 @@ class kontak_model extends CI_Model
         );
         
         $this->db->insert("grup", $data_baru);
+        
+        // Ambil id grup dari grup yang baru ditambahkan
+        $query = $this->db->get_where("grup", $data_baru);
+        $data_grup = $query->first_row("array");
+        
+        return $data_grup["id_grup"];
     }
     
     function sunting_grup($id_grup, $nama_grup)
@@ -98,6 +148,21 @@ class kontak_model extends CI_Model
         return $hasil;
     }
     
+    function lihat_semua_grup($nama_login)
+    {
+        $hasil = array();
+        $query = $this->db->get_where("grup", array("pengguna" => $nama_login));
+        if($query->num_rows() > 0)
+        {
+            foreach($query->result_array() as $row)
+            {
+                $hasil[] = $row;
+            }
+        }
+        return $hasil;
+    }
+    
+    
     // Grup + Kontak
     function tambah_kontak_pada_grup($id_kontak, $id_grup)
     {
@@ -106,12 +171,24 @@ class kontak_model extends CI_Model
             "kontak" => $id_kontak
         );
         
-        $this->db->insert("grup_kontak", $data_baru);
+        // Cek apakah sudah ada di dalam database, jika tidak, baru lakukan insert
+        $query = $this->db->get_where("grup_kontak", $data_baru);
+        if($query->num_rows == 0)
+        {
+            $this->db->insert("grup_kontak", $data_baru);
+        }
     }
     
-    function hapus_kontak_pada_grup($id_kontak, $id_grup)
+    function hapus_kontak_pada_grup($id_kontak, $id_grup = null)
     {
-        $this->db->delete("grup_kontak", array("kontak" => $id_kontak, "grup" => $id_grup));
+        if($id_grup != null)
+        {
+            $this->db->delete("grup_kontak", array("kontak" => $id_kontak, "grup" => $id_grup));
+        }
+        else
+        {
+            $this->db->delete("grup_kontak", array("kontak" => $id_kontak));
+        }
     }
     
     // Data validator
@@ -199,6 +276,41 @@ class kontak_model extends CI_Model
             return $data_kontak["no_handphone"];
         }
     }
+    
+    function ambil_id_grup($nama_grup)
+    {
+        $query = $this->db->get_where("grup", array("nama_grup" => $nama_grup));
+        if($query->num_rows > 0)
+        {
+            $data_grup = $query->first_row("array");
+            return $data_grup["id_grup"];
+        }
+        else
+        {
+            return null;
+        }
+    }
+    
+    function lihat_kontak_pada_grup($id_grup)
+    {
+        $hasil = array();
+        $query = $this->db->get_where("grup_kontak", array("grup" => $id_grup));
+        if($query->num_rows() > 0)
+        {
+            foreach ($query->result_array() as $row)
+            {
+                $hasil[] = $row['kontak'];
+            }
+            return $hasil;
+        }
+        else
+        {
+            return null;
+        }
+        
+    }
+    
+    
     
     
 }
