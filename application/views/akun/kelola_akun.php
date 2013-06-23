@@ -15,8 +15,8 @@
         <td><input type="text" size="50" name="nama_lengkap" value="<?php echo $pengguna['nama_lengkap']; ?>"/></td>
     </tr>
     <tr>
-    	<td><strong>Surel</strong></td>
-        <td><input type="text" size="50" name="surel" value="<?php echo $pengguna['surel']; ?>"/></td>
+    	<td><strong>Nomor Handphone</strong></td>
+        <td><input type="text" size="50" name="no_handphone" value="<?php echo $pengguna['no_handphone']; ?>"/></td>
     </tr>
     
 </table>
