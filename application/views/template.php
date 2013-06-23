@@ -10,9 +10,12 @@
 <head>
     <link rel="stylesheet" href="<?php echo base_url('assets/css/columnal.css'); ?>" />
     <link rel="stylesheet" href="<?php echo base_url('assets/css/style.css'); ?>" />
+    
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/token-input-facebook.css'); ?>" />
     <link rel="stylesheet" href="<?php echo base_url('assets/css/token-input.css'); ?>" />
     <script src="<?php echo base_url('assets/js/jquery-1.10.1.min.js'); ?>"></script>
     <script src="<?php echo base_url('assets/js/jquery.tokeninput.js'); ?>"></script>
+    <script src="<?php echo base_url('assets/js/jquery.simplemodal.1.4.4.min.js'); ?>"> </script>
     <title>JARKOM.IN</title>
     <script>
         $(document).ready(function() {
@@ -59,13 +62,25 @@
                     </div>
                     <center><strong>Menu Utama</strong></center>
                     <div id="sidebar">
+                        <a href="<?php echo site_url('/sms'); ?>">
                         <div class="sidebar-item">
-                            <img src="<?php echo base_url('assets/img/luv.png'); ?>" class="mobile-hide">
+                            <img src="<?php echo base_url('assets/img/envelope.png'); ?>" class="mobile-hide">
                                 <p>
-                                    <strong>Tidak ada</strong>
-                                    Menu ini belum diimplementasikan.
+                                    <strong>Kirim Pesan</strong>
+                                    Lakukan pengiriman pesan pada kontak atau grup melalui SMS ataupun Twitter secara otomatis.
                                 </p>
                         </div>
+                        </a>
+                        
+                        <a href="<?php echo site_url('/kontak'); ?>">
+                        <div class="sidebar-item">
+                            <img src="<?php echo base_url('assets/img/people.png'); ?>" class="mobile-hide">
+                                <p>
+                                    <strong>Mengelola Kontak</strong>
+                                    Kelola nomor handphone dan akun twitter kontak dan grup yang akan dikirimi pesan.
+                                </p>
+                        </div>
+                        </a>
                         
                     </div>
                 </div>		

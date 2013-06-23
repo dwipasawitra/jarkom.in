@@ -86,18 +86,18 @@ class akun extends CI_Controller
     function ubah_data_pengguna()
     {
         // Ambil data
-        $nama_lengkap = $_POST["nama_lengkap"];
-        $surel = $_POST["surel"];
+        $nama_lengkap = $this->input->post("nama_lengkap");
+        $no_handphone = $this->input->post("no_handphone");
         
         // Validasi
         $this->form_validation->set_rules("nama_lengkap", "Nama Lengkap", "required");
-        $this->form_validation->set_rules("surel", "Surat Elektronik", "required");
+        $this->form_validation->set_rules("no_handphone", "No. Handphone", "required");
         $this->form_validation->set_message("required", "%s belum diisi");
         $this->form_validation->set_error_delimiters("","<br/>");
         
         if($this->form_validation->run() == TRUE)
         {
-            $this->pengguna_model->ubah_data_pengguna($this->sesi_model->ambil_nama_login(), $nama_lengkap, $surel);
+            $this->pengguna_model->ubah_data_pengguna($this->sesi_model->ambil_nama_login(), $nama_lengkap, $no_handphone);
             $data['hasil'] = true;
             $data['pesan'] = "Data pengguna berhasil diubah";
         }

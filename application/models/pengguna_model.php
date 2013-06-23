@@ -14,13 +14,13 @@ class pengguna_model extends CI_Model
         parent::__construct();
     }
     
-    function tambahkan_pengguna($nama_login,$nama_lengkap,$surel, $password_md5)
+    function tambahkan_pengguna($nama_login,$nama_lengkap,$no_handphone, $password_md5)
     {
         // Asumsi: Password telah dikonversi ke MD5 oleh pengendali
         $data = array(
             "nama_login" => $nama_login,
             "nama_lengkap" => $nama_lengkap,
-            "surel" => $surel,
+            "surel" => $no_handphone,
             "password" => $password_md5,
             "kredit" => 0
         );
@@ -35,7 +35,7 @@ class pengguna_model extends CI_Model
         return $query->first_row("array");
     }
     
-    function ubah_data_pengguna($nama_login, $nama_lengkap = null, $surel = null, $password_md5 = null)
+    function ubah_data_pengguna($nama_login, $nama_lengkap = null, $no_handphone = null, $password_md5 = null)
     {
         if(!is_null($nama_lengkap)) 
         {
@@ -43,10 +43,10 @@ class pengguna_model extends CI_Model
             $this->db->update("pengguna", array("nama_lengkap" => $nama_lengkap));
         }
         
-        if(!is_null($surel)) 
+        if(!is_null($no_handphone)) 
         {
             $this->db->where("nama_login", $nama_login);
-            $this->db->update("pengguna", array("surel" => $surel));
+            $this->db->update("pengguna", array("no_handphone" => $no_handphone));
         }
         
         if(!is_null($password_md5)) 
@@ -83,6 +83,20 @@ class pengguna_model extends CI_Model
         $this->db->free_result();
         $this->db->update("pengguna", array("kredit" => $kredit));
         
+    }
+    
+    function ambil_nama_login_dari_no_handphone($no_handphone)
+    {
+        $query = $this->db->get_where("pengguna", array("no_handphone" => $no_handphone));
+        if($query->num_rows() > 0)
+        {
+            $data_pengguna = $query->first_row("array");
+            return $data_pengguna['nama_login'];
+        }
+        else
+        {
+            return null;
+        }
     }
 }
 ?>

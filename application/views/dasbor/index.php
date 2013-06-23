@@ -14,9 +14,9 @@
     </tr>
     <tr height="150" bordercolor="#FFFFFF">
     	<td width="140"><img src="<?php echo base_url('assets/img/pesan.png'); ?>" width="140" height="140"></td>
-        <td width="200" style="vertical-align:top"><h4><font face="Tahoma, Geneva, sans-serif"><a href="<?php echo site_url('/sms'); ?>"KIRIM PESAN</font></h4><br>Kirim pesan dengan cepat dan mudah</td>
+        <td width="200" style="vertical-align:top"><h4><font face="Tahoma, Geneva, sans-serif">KIRIM PESAN</font></h4><br>Kirim pesan dengan cepat dan mudah</td>
      	<td bgcolor="#FFFFFF" width="10"> &nbsp;</td>
-        <td colspan="2" style="vertical-align:top; alignment-adjust:middle"><h4><font face="Tahoma, Geneva, sans-serif">KREDIT ANDA <br> Rp.500.000 </font></h4></td>
+        <td colspan="2" style="vertical-align:top; alignment-adjust:middle"><h4><font face="Tahoma, Geneva, sans-serif">KREDIT ANDA <br> 500 </font></h4></td>
        
     </tr>
    
