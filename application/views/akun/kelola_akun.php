@@ -7,8 +7,8 @@
 <form method="post" action="<?php echo site_url("/akun/ubah_data_pengguna"); ?>" id="data_pengguna">
 <table>
 	<tr>
-    	<td><strong>Nama akun</strong></td>
-        <td>wira</td>
+    	<td class="col_title"><strong>Nama akun</strong></td>
+        <td class="col_content">wira</td>
     </tr>
     <tr>
     	<td><strong>Nama lengkap</strong></td>
@@ -32,8 +32,8 @@
 <form method="post" action="<?php echo site_url("/akun/ubah_password"); ?>" id="password">
 <table>
 	<tr>
-    	<td><strong>Password Lama</strong></td>
-        <td><input type="password" size="50" name="password_lama" /></td>
+    	<td class="col_title"><strong>Password Lama</strong></td>
+        <td class="col_content"><input type="password" size="50" name="password_lama" /></td>
     </tr>
     <tr>
     	<td><strong>Password Baru</strong></td>
@@ -44,6 +44,7 @@
         <td><input type="password" size="50" name="ulangi_password_baru" /></td>
     </tr>
 </table>
+ 
 <input type="submit" value="Ubah password" />
 </form>
 

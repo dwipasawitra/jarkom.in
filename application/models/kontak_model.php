@@ -31,15 +31,16 @@ class kontak_model extends CI_Model
     
     function sunting_kontak($id_kontak, $nama_kontak = null, $no_handphone = null)
     {
-        $this->db->where("id_kontak", $id_kontak);
         
         if($nama_kontak != null)
         {
+            $this->db->where("id_kontak", $id_kontak);
             $this->db->update("kontak", array("nama_kontak" => $nama_kontak));
         }
         
         if($no_handphone != null)
         {
+            $this->db->where("id_kontak", $id_kontak);
             $this->db->update("kontak", array("no_handphone" => $no_handphone));
         }
     }
@@ -77,10 +78,23 @@ class kontak_model extends CI_Model
         return $hasil;
     }
     
-    function lihat_semua_kontak($nama_login)
+    function lihat_semua_kontak($nama_login, $id_grup = null)
     {
         $hasil = array();
-        $query = $this->db->get_where("kontak", array("pengguna" => $nama_login));
+        $this->db->order_by("nama_kontak", "asc");
+        
+        if($id_grup == null)
+        {
+            
+            $query = $this->db->get_where("kontak", array("kontak.pengguna" => $nama_login));
+        }
+        else
+        {
+            $this->db->select(array("id_kontak", "id_grup", "nama_kontak", "no_handphone", "twitter"));
+            $this->db->join("grup_kontak", "grup_kontak.kontak = kontak.id_kontak", "inner");
+            $this->db->join("grup", "grup_kontak.grup = grup.id_grup", "inner");
+            $query = $this->db->get_where("kontak", array("kontak.pengguna" => $nama_login, "id_grup" => $id_grup));
+        }
         if($query->num_rows() > 0)
         {
             foreach($query->result_array() as $row)
@@ -292,7 +306,7 @@ class kontak_model extends CI_Model
     }
     
     function lihat_kontak_pada_grup($id_grup)
-    {
+    {   
         $hasil = array();
         $query = $this->db->get_where("grup_kontak", array("grup" => $id_grup));
         if($query->num_rows() > 0)

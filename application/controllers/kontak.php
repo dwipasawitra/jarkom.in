@@ -44,9 +44,19 @@ class kontak extends CI_Controller
         // Menampilkan semua daftar kontak dari pengguna
         $data['content'] = "contact/index";
         $data['title'] = "Mengelola Kontak";
+        $id_grup = $this->input->get("id_grup");
+        $data['id_grup'] = $id_grup;
         
         // Ambil data kontak dari pengguna
-        $data['kontak'] = $this->kontak_model->lihat_semua_kontak($this->sesi_model->ambil_nama_login());
+        if($id_grup == FALSE)
+        {
+            $data['id_grup'] = -1;
+            $data['kontak'] = $this->kontak_model->lihat_semua_kontak($this->sesi_model->ambil_nama_login());
+        }
+        else
+        {
+            $data['kontak'] = $this->kontak_model->lihat_semua_kontak($this->sesi_model->ambil_nama_login(), $id_grup);
+        }
         
         // Cari tahu kontak ini masuk grup apa saja
         // http://stackoverflow.com/questions/3663881/update-object-value-within-foreach-loop
