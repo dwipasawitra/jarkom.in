@@ -31,7 +31,15 @@ class akun extends CI_Controller
             else
             {
                 $data['hasil'] = false;
-                $data['pesan'] = "Nama login atau password salah";
+                if($this->sesi_model->apakah_batas_percobaan_login())
+                {
+                   $data['pesan'] = "Batas login terpenuhi, silahkan mencoba beberapa saat lagi.";
+                }
+                else
+                {
+                    $data['pesan'] = "Nama login atau password salah<br/>Percobaan login ke-" . $this->sesi_model->lihat_jumlah_percobaan_login();
+            
+                }
             }
             
         
@@ -162,6 +170,12 @@ class akun extends CI_Controller
         {
             redirect("/akun/kelola_akun");
         }
+    }
+    
+    function ambil_poin_json()
+    {
+        $data['poin'] = $this->pengguna_model->lihat_kredit_pengguna($this->sesi_model->ambil_nama_login());
+        echo json_encode($data);
     }
 }
 ?>

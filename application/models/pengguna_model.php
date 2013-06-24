@@ -80,9 +80,30 @@ class pengguna_model extends CI_Model
         // Tambahkan kredit
         $kredit += $tambahan_popup;
         
-        $this->db->free_result();
+        $this->db->where("nama_login", $nama_login);
         $this->db->update("pengguna", array("kredit" => $kredit));
         
+    }
+    
+    function lihat_kredit_pengguna($nama_login)
+    {
+        $data = $this->baca_data_pengguna($nama_login);
+        return intval($data['kredit']);
+    }
+    
+    function kurangi_kredit($nama_login, $pengurangan_poin)
+    {
+        // Ambil nilai kredit pengguna sebelumnya
+        $query = $this->db->get_where("pengguna", array("nama_login" => $nama_login));
+        $row = $query->first_row("array");
+        $kredit = intval($row["kredit"]);
+        
+        
+        // Kurangi kredit
+        $kredit -= $pengurangan_poin;
+        
+        $this->db->where("nama_login", $nama_login);
+        $this->db->update("pengguna", array("kredit" => $kredit));
     }
     
     function ambil_nama_login_dari_no_handphone($no_handphone)

@@ -48,7 +48,8 @@ class kegiatan_model extends CI_Model
     
     function lihat_semua_kegiatan($nama_login)
     {
-        $query = $this->db->get_where("kegiatan", array("pengguna" => $nama_login));
+        $this->db->join("grup", "kegiatan.grup=grup.id_grup", "inner");
+        $query = $this->db->get_where("kegiatan", array("kegiatan.pengguna" => $nama_login));
         
         return $query->result_array();
         
@@ -57,6 +58,7 @@ class kegiatan_model extends CI_Model
     
     function ambil_data_kegiatan($id_kegiatan)
     {
+        $this->db->join("grup", "kegiatan.grup=grup.id_grup", "inner");
         $query = $this->db->get_where("kegiatan", array("id_kegiatan" => $id_kegiatan));
         if($query->num_rows() > 0)
         {
