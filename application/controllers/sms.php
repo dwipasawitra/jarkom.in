@@ -10,6 +10,7 @@ class sms extends CI_Controller
             return;
         }
         $this->load->model("kontak_model");
+        $this->load->model("pengguna_model");
         $this->load->model("sms_model");
     }
     
@@ -46,6 +47,25 @@ class sms extends CI_Controller
         }
         
         return $hasil;
+    }
+    
+    function jumlah_kredit_dibutuhkan()
+    {
+        $masukan_kontak = $this->input->post("kontak");
+        $panjang_sms = $this->input->post("panjang_sms");
+        $hasil = $this->_proses_masukan_kontak($masukan_kontak);
+        
+        if($panjang_sms > 0)
+        {
+            $data['kredit_dibutuhkan'] =  count($hasil) * ceil(intval($panjang_sms)/160);
+        }
+        else
+        {
+            $data['kredit_dibutuhkan'] =  count($hasil);
+        }
+        
+        $data['kredit_saat_ini'] = $this->pengguna_model->lihat_kredit_pengguna($this->sesi_model->ambil_nama_login());
+        echo json_encode($data);
     }
     
     function proses_sms()

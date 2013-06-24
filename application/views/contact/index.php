@@ -6,8 +6,8 @@
     <form method="post" action="<?php echo site_url('kontak/tambah_kontak'); ?>" id="add-form">
     <table>
         <tr>
-            <td>Nama Kontak</td>
-            <td><input type="text" name="nama_kontak" /></td>
+            <td class="col_title">Nama Kontak</td>
+            <td class="col_content"><input type="text" name="nama_kontak" /></td>
         </tr>
         <tr>
             <td>Nomor Handphone</td>
@@ -19,10 +19,7 @@
             <td><input type="text" name="akun_twitter" /></td>
             
         </tr>
-        <tr>
-            <td>Grup yang diikuti</td>
-            <td><input type="text" name="data_grup" class="grup_kontak_input" /></td>
-        </tr>
+       
     </table>
         <input type="submit" value="Tambah Kontak Baru" />
     </form>
@@ -58,7 +55,12 @@
     
 </div>
 <table>
-    <span class="link-action" onclick="buka_tambah_kontak()">Tambah Kontak Baru</span> | Kelola Grup | Tampilkan untuk grup :<br/>
+    <span class="link-action" onclick="buka_tambah_kontak()">Tambah Kontak Baru</span> | 
+    Tampilkan untuk grup :
+    <select id="pilihan-grup">
+        <option value="-1" selected>-- Pilih Grup --</option>
+    </select>
+    <br/>
     <?php foreach($kontak as $row) { ?>
         <tr style="border: 1px solid black;">
             <td style="width: 50%; padding: 2%;">
@@ -79,14 +81,14 @@
 </table>
 <script>
     function buka_tambah_kontak() {
-           $("#add-dialog").modal();
+           $("#add-dialog").modal({overlayClose: true});
            
            $("#error-add-dialog").hide();
     }
     
     function buka_edit_kontak(id_kontak)
     {
-        $("#edit-dialog").modal();
+        $("#edit-dialog").modal({overlayClose: true});
         $("#error-edit-dialog").hide();
         
         // Ambil data untuk disunting
@@ -113,7 +115,22 @@
     $(document).ready(function(){
        $("#add-dialog").hide();
        $("#edit-dialog").hide();
-       $(".grup_kontak_input").tokenInput("<?php echo site_url('kontak/list_grup_json'); ?>", { preventDuplicates: true });
+       $.get("<?php echo site_url('kontak/lihat_semua_grup'); ?>", "", function(data){
+           $.each(data, function(i, row) {
+                if(row.id_grup == <?php echo $id_grup; ?>) {
+                    $("#pilihan-grup").append("<option value='" + row.id_grup + "' selected>" + row.nama_grup +"</option>" );
+                } else {
+                    $("#pilihan-grup").append("<option value='" + row.id_grup + "'>" + row.nama_grup +"</option>" );
+                }
+           });
+       }, "json");
+       
+       $("#pilihan-grup").change(function() {
+            if($(this).val() !== "-1") {
+                window.location = "<?php echo site_url('/kontak');?>?id_grup=" + $(this).val(); 
+            }
+       });
+       
        $("#add-form").submit(function(){
             $.post("<?php echo site_url('kontak/tambah_kontak'); ?>", $(this).serialize(), function(data){
                 if(data.hasil === false) {
