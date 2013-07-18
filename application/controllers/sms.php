@@ -49,6 +49,30 @@ class sms extends CI_Controller
         return $hasil;
     }
     
+    function _proses_masukan_grup($masukan_kontak)
+    {
+        $hasil = array();
+        
+        // Masukan kontak harus divalidasi terlebih dahulu
+        if($this->_validasi_masukan_kontak($masukan_kontak) == TRUE)
+        {
+            // Pecah masukan kontak berdasarkan tanda komanya
+            $masukan_kontak = explode(",", $masukan_kontak);
+            
+            foreach($masukan_kontak as $kontak)
+            {
+                $id_grup = $this->kontak_model->ambil_id_grup($kontak);
+                if($id_grup != null)
+                {
+                    $hasil[] = $id_grup;
+                }
+            }
+        }
+        
+        return $hasil;
+        
+    }
+    
     function jumlah_kredit_dibutuhkan()
     {
         $masukan_kontak = $this->input->post("kontak");
@@ -103,6 +127,16 @@ class sms extends CI_Controller
                  * 
                  */
                 $this->sms_model->kirim_sms($id_kontak, $konten);
+            }
+            
+            // Fitur pengiriman pesan ke Facebook 17/07/2013
+            // Cek adanya grup pada masukan kontak
+            
+            $id_grup_array = $this->_proses_masukan_grup($kontak);
+            foreach($id_grup_array as $id_grup)
+            {
+                // Tambahkan pada tabel grup_pesan
+                $this->sms_model->kirim_grup_pesan($id_grup, $konten);
             }
             
             $data['hasil'] = true;

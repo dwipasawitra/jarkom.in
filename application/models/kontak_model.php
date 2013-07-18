@@ -65,9 +65,7 @@ class kontak_model extends CI_Model
     function lihat_kontak($nama_login, $kriteria)
     {
         $hasil = array();
-        $this->db->like("nama_kontak", $kriteria);
-        $this->db->or_like("no_handphone", $kriteria);
-        $query = $this->db->get_where("kontak", array("pengguna" => $nama_login));
+        $query = $this->db->query("select * from kontak where pengguna='" . $nama_login . "' AND (nama_kontak LIKE '%" . $kriteria . "%' OR no_handphone LIKE '%" . $kriteria . "%')");
         if($query->num_rows() > 0)
         {
             foreach($query->result_array() as $row)
@@ -323,8 +321,27 @@ class kontak_model extends CI_Model
         }
         
     }
+    //fungsi baru sunting facebook grup untuk bisa posting di grup
     
+    function sunting_facebook_grup($id_grup, $facebook_group_id)
+    {
+        $this->db->where("id_grup", $id_grup);
+        $this->db->update("grup", array("facebook_group_id" => $facebook_group_id));
+    }
     
+    function ambil_id_grup_facebook($id_grup)
+    {
+        $query = $this->db->get_where("grup", array("id_grup" => $id_grup));
+        if($query->num_rows() > 0)
+        {
+            $result = $query->first_row("array");
+            return $result['facebook_group_id'];
+        }
+        else
+        {
+            return null;
+        }
+    }
     
     
 }

@@ -26,18 +26,29 @@
             $("#form_login").submit(function() {
                 $.post("<?php echo site_url('/akun/login'); ?>", $(this).serialize(), function(data) {
                     $("#error-left").hide();
-                    if(data.hasil == true) {
+                    if(data.hasil === true) {
                         window.location = "<?php echo site_url('/'); ?>"
                     }
                     else
                     {
                         $("#error-left").html(data.pesan);
-                        $("#error-left").fadeIn(500);
-                    }
+                        $("#error-left").show(); 
+                   }
                 }, "json");
                 return false;
             });
         });
+    </script>
+    <script>
+        function muat_ulang_poin()
+        {
+            
+            $.get("<?php echo site_url('akun/ambil_poin_json'); ?>", "", function(data) {
+                $("#poin").html(data.poin);
+                $("#poin").fadeOut(250);
+                $("#poin").fadeIn(250);
+            }, "json");
+        }
     </script>
 </head>
 <body lang="id">
@@ -47,7 +58,7 @@
                 <div id="left-part-content">
                     <center><img id="logo" src="<?php echo base_url('assets/img/logo.png'); ?>" /></center>
                     <p id="tagline">Solusi SMS broadcast/masal murah, cepat dan handal</p>
-                    <div id="error-left">
+                    <div id="error-left" class="nodisplay">
                     </div>
                     <div id="login-form">
                     <?php if($this->sesi_model->apakah_login()) { ?>
@@ -102,8 +113,9 @@
                         <div class="sidebar-item">
                         <center><strong>Kredit Anda</strong><br/>
                             <h1><h2><span id="poin"><?php echo $this->pengguna_model->lihat_kredit_pengguna($this->sesi_model->ambil_nama_login()); ?></span> poin</h2> </h1></center>
-                            <p>Kredit adalah jumlah kuota Anda dapat mengirim SMS sebanyak 160 karakter. Untuk menambah kredit, silahkan lakukan pembelian kredit melalui tautan ini</p>
+                            <span>Kredit adalah jumlah kuota Anda dapat mengirim SMS sebanyak 160 karakter. Untuk menambah kredit, silahkan lakukan pembelian kredit melalui tautan ini</span>
                         </div>
+                        
                         <div class="sidebar-item">
                             
                             <center><strong>Kirim pesan via SMS</strong></center>
@@ -136,15 +148,6 @@
             </div>
         </div>	
     </div>
-    <script>
-        function muat_ulang_poin()
-        {
-            $("#poin").hide();
-            $.get("<?php echo site_url('akun/ambil_poin_json'); ?>", "", function(data) {
-                $("#poin").html(data.poin);
-                $("#poin").fadeIn(500);
-            }, "json");
-        }
-    </script>
+    
 </body>
 </html>

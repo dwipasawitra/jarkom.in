@@ -18,7 +18,7 @@
 <p>Satu poin dapat digunakan untuk mengirim 1 SMS 160 karakter ke seorang penerima.</p>
 <p>Apa yang membuat JARKOM.IN berbeda dengan layanan sejenis lainnya?</p>
 <ul>
-    <li>Pesan terkirim via SMS maupun Twitter dari penerimanya</li>
+    <li>Pesan terkirim via SMS maupun Halaman Grup Facebook (pastikan sudah add "Bot Jarkomin" pada grup FB bersangkutan)</li>
     <li>Modem yang digunakan untuk mengirim berjumlah 7, dengan operator yang berbeda-beda. SMS akan dikirim via modem dengan operator yang sesuai</li>
     <li>Manajemen kegiatan, pengingat adanya kegiatan dan konfirmasi kehadiran pesertanya</li>
     <li>Pesan dapat dikirimkan via HP pengguna :)</li>
