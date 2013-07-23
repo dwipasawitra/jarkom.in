@@ -1,42 +1,3 @@
-<p>Silahkan menulis tujuan pesan (dalam bentuk nama grup, nama kontak atau nomor handphone penerima) beserta pesan yang ingin dikirimkan. Untuk saat ini,
-    JARKOM.IN hanya membatasi pengiriman pesan pendek 160 karakter per pesannya. Setiap pengiriman pesan SMS berharga 1 poin.
-    
-</p>
-<p>
-    <strong>Fitur pengiriman pesan via Twitter akan segera diimplementasikan -- Admin</strong>
-</p>
-<h3>Kirim Pesan</h3><br>
-<div id="sms-error" class="error">
-</div>
-<div class="success">
-</div>
-<form name="form_kirim" action="<?php echo site_url('sms/proses_sms'); ?>" method="post" id="form-sms">
-	<table>
-		<tr>
-			<td class="col_title"><strong>Kirim Ke&nbsp;</strong></td>
-			<td class="col_content"><input type="text" name="kontak" size="40" id="kontak"/> </td>
-		</tr>
-       
-                 <tr>
-			<td  style="vertical-align:top" ><strong>Pesan</strong></td>
-			<td><textarea name="konten" cols="50" rows="5" id="konten"> </textarea></td>
-		</tr>
-                <tr>
-			<td  style="vertical-align:top" ><strong>Jumlah Karakter</strong></td>
-			<td><input id="jumlah-karakter" type="text" readonly="readonly" size="4" value="0"/></td>
-                </tr>
-                        <td  style="vertical-align:top" ><strong>Kredit yang dibutuhkan</strong></td>
-			<td><input id="kredit-dibutuhkan" type="text" readonly="readonly" size="4" value="0"/>
-                            <span id="kredit-dibutuhkan-msg">Kredit Anda tidak mencukupi!</span>
-                        </td>
-		</tr>
-    
-                 <tr>
-			<td><input type="submit" value="Kirimkan Pesan!" /><input type="button" value="Ulangi" onclick="reset_form()"/></td>
-			<td>&nbsp;</td>
-		</tr>
-	</table>
-</form>
 <script>
     function reset_form()
     {
@@ -115,3 +76,42 @@
        });
     });
 </script>
+<p>Silahkan menulis tujuan pesan (dalam bentuk nama grup, nama kontak atau nomor handphone penerima) beserta pesan yang ingin dikirimkan. Untuk saat ini,
+    JARKOM.IN hanya membatasi pengiriman pesan pendek 160 karakter per pesannya. Setiap pengiriman pesan SMS berharga 1 poin.
+    
+</p>
+<p>
+    <strong>Fitur pengiriman post ke Halaman Grup Facebook sudah siap! Namun fitur untuk Twitter masih pikir2.</strong>
+</p>
+<h3>Kirim Pesan</h3><br>
+<div id="sms-error" class="error nodisplay">
+</div>
+<div class="success nodisplay">
+</div>
+<form name="form_kirim" action="<?php echo site_url('sms/proses_sms'); ?>" method="post" id="form-sms">
+	<table>
+		<tr>
+			<td class="col_title"><strong>Kirim Ke&nbsp;</strong></td>
+			<td class="col_content"><input type="text" name="kontak" size="40" id="kontak"/> </td>
+		</tr>
+       
+                 <tr>
+			<td  style="vertical-align:top" ><strong>Pesan</strong></td>
+			<td><textarea name="konten" cols="50" rows="5" id="konten"> </textarea></td>
+		</tr>
+                <tr>
+			<td  style="vertical-align:top" ><strong>Jumlah Karakter</strong></td>
+			<td><input id="jumlah-karakter" type="text" readonly="readonly" size="4" value="0"/></td>
+                </tr>
+                        <td  style="vertical-align:top" ><strong>Kredit yang dibutuhkan</strong></td>
+			<td><input id="kredit-dibutuhkan" type="text" readonly="readonly" size="4" value="0"/>
+                            <span id="kredit-dibutuhkan-msg" class="nodisplay">Kredit Anda tidak mencukupi!</span>
+                        </td>
+		</tr>
+    
+                 <tr>
+			<td><input type="submit" value="Kirimkan Pesan!" /><input type="button" value="Ulangi" onclick="reset_form()"/></td>
+			<td>&nbsp;</td>
+		</tr>
+	</table>
+</form>

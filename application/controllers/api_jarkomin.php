@@ -99,6 +99,31 @@ class api_jarkomin extends CI_Controller
         
     }
     
+    function lihat_pesan_grup_siap_kirim()
+    {
+        $hasil = array();
+        
+        // List semua SMS yang belum terkirim
+        $pesan_grup_siap_kirim = $this->sms_model->daftarkan_pesan_grup_siap_kirim();
+        
+        // Cari nomor handphone untuk setiap id kontak
+        foreach($pesan_grup_siap_kirim as $pesan_grup)
+        {
+            $id_grup_facebook = $this->kontak_model->ambil_id_grup_facebook($pesan_grup["grup"]);
+            $hasil[] = array("id_pesan" => $pesan_grup["id_grup_pesan"], "grup_fb" => $id_grup_facebook, "konten" => $pesan_grup["pesan"]);
+        }
+        
+        // Kirimkan hasilnya ke klien
+        header("Content-Type: application/json");
+        echo json_encode($hasil);
     
+    }
+    
+    function tandai_pesan_grup_sudah_terkirim()
+    {
+        $id_grup_pesan = $this->input->post("id_grup_pesan");
+        $this->sms_model->tandai_grup_pesan_sudah_terkirim($id_grup_pesan);
+        
+    }
 }
 ?>

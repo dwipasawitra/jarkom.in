@@ -158,11 +158,11 @@ class kegiatan_model extends CI_Model
     function ubah_data_konfirmasi($id_kegiatan, $id_kontak, $konfirmasi)
     {
         $this->db->where(array("kegiatan" => $id_kegiatan, "kontak" => $id_kontak));
-        if($konfirmasi == "Y")
+        if(strtoupper($konfirmasi) == "Y")
         {
             $this->db->update("konfirmasi_kegiatan", array("konfirmasi" => 1));
         }
-        else if ($konfirmasi == "T")
+        else if (strtoupper($konfirmasi) == "T")
         {
             $this->db->update("konfirmasi_kegiatan", array("konfirmasi" => 0));
         }

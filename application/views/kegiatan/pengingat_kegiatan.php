@@ -1,4 +1,4 @@
-<div id="tambah-pengingat" class="modal-dialog">
+<div id="tambah-pengingat" class="modal-dialog nodisplay">
     <h1>Tambah Pengingat</h1>
     <div class="error"></div>
     <form>
@@ -17,7 +17,7 @@
         </tr>
         <td  style="vertical-align:top" ><strong>Kredit yang dibutuhkan</strong></td>
             <td><input id="kredit-dibutuhkan" type="text" readonly="readonly" size="4" value="0"/>
-                <span id="kredit-dibutuhkan-msg"><br/>Kredit Anda tidak mencukupi!</span>
+                <span id="kredit-dibutuhkan-msg" class="nodisplay"><br/>Kredit Anda tidak mencukupi!</span>
             </td>
 	</tr>
     </table>

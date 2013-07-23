@@ -1,6 +1,4 @@
 <?php
-
-
 /*
  * sms_model.php
  * Penulis: Putu Wiramaswara Widya <initrunlevel0@gmail.com>
@@ -14,6 +12,7 @@ class sms_model extends CI_Model
     function __construct()
     {
         parent::__construct();
+        date_default_timezone_set("Asia/Jakarta");
         $this->load->model("pengguna_model");
     }
     
@@ -56,6 +55,7 @@ class sms_model extends CI_Model
         
             if($waktu_kirim == null)
             {
+                
                 $waktu_kirim = new DateTime();
 
             }
@@ -69,6 +69,28 @@ class sms_model extends CI_Model
             // Kurangi poin 1 poin
             $this->pengguna_model->kurangi_kredit($nama_login, 1);
         }
+        
+        
+    }
+    
+    // Grup pesan area
+    
+    function kirim_grup_pesan($id_grup, $pesan)
+    {
+        $grup_pesan_baru = array('grup' => $id_grup, 'pesan' => $pesan, 'terkirim' => FALSE);
+        $this->db->insert("grup_pesan", $grup_pesan_baru);
+    }
+        
+    function tandai_grup_pesan_sudah_terkirim($id_grup_pesan)
+    {
+        $this->db->where("id_grup_pesan", $id_grup_pesan);
+        $this->db->update("grup_pesan", array("terkirim" => TRUE));
+    }
+    
+    function daftarkan_pesan_grup_siap_kirim()
+    {
+        $query = $this->db->get_where("grup_pesan", array("terkirim" => FALSE));
+        return $query->result_array();
     }
     
     

@@ -1,4 +1,4 @@
-<div id="tambah-kegiatan" class="modal-dialog">
+<div id="tambah-kegiatan" class="modal-dialog nodisplay">
     <h1>Membuat kegiatan baru</h1>
     <div class="error"></div>
     <p>Silahkan tentukan nama kegiatan, waktu pelaksanaan serta kelompok yang berpartisipasi dalam kegiatan ini</p>

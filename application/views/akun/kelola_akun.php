@@ -1,8 +1,8 @@
 <p>Pada halaman ini, Anda dapat mengubah beberapa data diri beserta password/kata sandi dari akun Anda</p>
 <h3>Data diri</h3>
-<div id="data-pengguna-error" class="error">
+<div id="data-pengguna-error" class="error nodisplay">
 </div>
-<div id="data-pengguna-success" class="success">
+<div id="data-pengguna-success" class="success nodisplay">
 </div>
 <form method="post" action="<?php echo site_url("/akun/ubah_data_pengguna"); ?>" id="data_pengguna">
 <table>
@@ -25,9 +25,9 @@
 <br/>
 
 <h3>Password</h3>
-<div id="password-error" class="error">
+<div id="password-error" class="error nodisplay">
 </div>
-<div id="password-success" class="success">
+<div id="password-success" class="success nodisplay">
 </div>
 <form method="post" action="<?php echo site_url("/akun/ubah_password"); ?>" id="password">
 <table>

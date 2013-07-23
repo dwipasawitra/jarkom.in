@@ -1,6 +1,6 @@
-<div id="add-dialog" class="modal-dialog">
+<div id="add-dialog" class="modal-dialog nodisplay">
     <h1>Tambah Kontak Baru</h1>
-    <div id="error-add-dialog" class="error" />
+    <div id="error-add-dialog" class="error nodisplay" />
     </div>
     <p>Silahkan isi nama kontak, nomor handphone dan akun twitter kontak.</p>
     <form method="post" action="<?php echo site_url('kontak/tambah_kontak'); ?>" id="add-form">
@@ -26,7 +26,7 @@
     
     
 </div>
-<div id="edit-dialog" class="modal-dialog">
+<div id="edit-dialog" class="modal-dialog nodisplay">
     <h1>Sunting Kontak</h1>
     <div id="error-edit-dialog" class="error" />
     </div>
@@ -54,12 +54,13 @@
     
     
 </div>
-<table>
+<table style="width: 100%">
     <span class="link-action" onclick="buka_tambah_kontak()">Tambah Kontak Baru</span> | 
-    Tampilkan untuk grup :
+    Tampilkan untuk grup : 
     <select id="pilihan-grup">
         <option value="-1" selected>-- Pilih Grup --</option>
     </select>
+    <a class="link-action" href="<?php echo site_url('grup');?>"> Kelola Grup </a>
     <br/>
     <?php foreach($kontak as $row) { ?>
         <tr style="border: 1px solid black;">
