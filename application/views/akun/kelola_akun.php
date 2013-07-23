@@ -25,9 +25,9 @@
 <br/>
 
 <h3>Password</h3>
-<div id="password-error" class="error">
+<div id="password-error" class="error nodisplay">
 </div>
-<div id="password-success" class="success">
+<div id="password-success" class="success nodisplay">
 </div>
 <form method="post" action="<?php echo site_url("/akun/ubah_password"); ?>" id="password">
 <table>
